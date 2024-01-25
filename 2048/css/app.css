@@ -1,0 +1,36 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+html {
+    height: -webkit-fill-available;
+}
+
+body {
+    background-color: rgb(30, 29, 29);
+    
+    color: rgb(188, 184, 184);
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+}
+
+header {
+    display: flex;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 50px;
+    padding: 1rem;
+}
