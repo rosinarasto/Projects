@@ -1,5 +1,5 @@
-.board {
-    margin: 125px;
+main.board {
+    margin: 30px;
     padding: 7px;
 
     border-radius: 3%;
@@ -12,6 +12,8 @@
 }
 
 .row {
+    padding: 0px;
+    margin: 0px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 }

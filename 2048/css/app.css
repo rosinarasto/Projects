@@ -11,7 +11,7 @@ html {
 
 body {
     background-color: rgb(30, 29, 29);
-    
+
     color: rgb(188, 184, 184);
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
@@ -19,18 +19,41 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: start;
 
     min-height: 100vh;
     min-height: -webkit-fill-available;
 }
 
 header {
-    display: flex;
+    display: grid;
     align-items: center;
 }
 
 header h1 {
+    margin: 0px;
+    padding: 0px;
     font-size: 50px;
-    padding: 1rem;
+    padding-top: 30px;
+}
+
+.reset-button {
+    border: 2px solid;
+    border-radius: 10%;
+
+    padding: 10px;
+    margin-top: 40px;
+
+    background-color: rgb(188, 184, 184);
+
+    color:rgb(30, 29, 29);
+    font-size: larger;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+}
+
+.reset-button:hover,
+.reset-button:active {
+    border: 4px solid;
+    background-color: rgb(148, 144, 144);
 }

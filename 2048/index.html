@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href=".\css\app.css">
     <link rel="stylesheet" href=".\css\board.css">
+    <link rel="stylesheet" href=".\css\score.css">
 
     <script defer src=".\app.js"></script>
 </head>
@@ -14,29 +15,47 @@
 <body>
 
     <header>
+        
         <h1>2048</h1>
+
+        <div class="score-board">
+
+            <div class="score">
+                <h2 class="headline">SCORE</h2>
+                <h2 class="headline"></h2>
+                <h2 class="num-score">0</h2>
+            </div>
+
+            <div class="score">
+                <h2 class="headline">BEST</h2>
+                <h2 class="headline">SCORE</h2>
+                <h2 class="num-score">0</h2>
+            </div>
+
+        </div>
+
     </header>
 
     <main class="board">
         
         <div class="row">
-            <div data-index="0" class="cell is2">2</div>
-            <div data-index="1" class="cell is4">4</div>
-            <div data-index="2" class="cell is8">8</div>
-            <div data-index="3" class="cell is16">16</div>
+            <div data-index="0" class="cell isEmpty"></div>
+            <div data-index="1" class="cell isEmpty"></div>
+            <div data-index="2" class="cell isEmpty"></div>
+            <div data-index="3" class="cell isEmpty"></div>
         </div>
 
         <div class="row">
-            <div data-index="0" class="cell is32">32</div>
-            <div data-index="1" class="cell is64">64</div>
-            <div data-index="2" class="cell is128">128</div>
-            <div data-index="3" class="cell is256">256</div>
+            <div data-index="0" class="cell isEmpty"></div>
+            <div data-index="1" class="cell isEmpty"></div>
+            <div data-index="2" class="cell isEmpty"></div>
+            <div data-index="3" class="cell isEmpty"></div>
         </div>
 
         <div class="row">
-            <div data-index="0" class="cell is512">512</div>
-            <div data-index="1" class="cell is1024">1024</div>
-            <div data-index="2" class="cell is2048">2048</div>
+            <div data-index="0" class="cell isEmpty"></div>
+            <div data-index="1" class="cell isEmpty"></div>
+            <div data-index="2" class="cell isEmpty"></div>
             <div data-index="3" class="cell isEmpty"></div>
         </div>
 
@@ -51,6 +70,7 @@
     
     <footer>
 
+        <button class="reset-button" type="reset">RESET</button>
     
     </footer>
 
