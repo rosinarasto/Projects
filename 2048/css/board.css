@@ -1,4 +1,6 @@
-main.board {
+.board {
+    position: relative;
+
     margin: 30px;
     padding: 7px;
 
