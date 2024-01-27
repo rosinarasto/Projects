@@ -1,0 +1,49 @@
+.gameProcess {
+    position: absolute;
+    background-color: rgba(184, 184, 184, 0);
+    color: rgba(184, 184, 184, 0);
+}
+
+.gameProcess .resetButton,
+.gameProcess .resetButton:active,
+.gameProcess .resetButton:hover {
+    background-color: rgba(184, 184, 184, 0);
+    color: rgba(184, 184, 184, 0);
+    border: 0px solid;
+
+}
+
+.gameOver {
+    display: grid;
+
+    position: absolute;
+    top: 49.6%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+
+    color: rgb(30, 29, 29);
+    background-color: rgba(184, 184, 184, 0.8);
+
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    border-radius: 5%;
+}
+
+.gameOver h2 {
+    margin: 10px;
+    margin-top: 0px;
+}
+
+.gameOver .resetButton {
+    border-radius: 6%;
+    margin: 10px;
+    margin-top: 0px;
+}
+
+.gameOver .resetButton:hover,
+.gameOver .resetButton:active {
+    margin: 5px;
+    margin-top: 0px;
+}
