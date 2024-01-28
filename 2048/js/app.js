@@ -22,12 +22,14 @@ function getClassName(cell) {
 
 //find and fill empty cell if there is any
 function fillEmptyCell() {
+    if (fullTable())
+        return;
+
     let x, y;
 
     while (cells[(x = getRandomInt(4))][(y = getRandomInt(4))] != 0);
 
     cells[x][y] = 2;
-    return true;
 }
 
 //add number and collor to cells that are not empty
@@ -51,97 +53,106 @@ function drawCells() {
 
 // keyboard
 document.addEventListener('keydown', (event) => {
+    let madeMove = false;
     switch (event.key) {
         case 'ArrowUp':
-            makeMove(1, 4, 1, false);
+            madeMove = makeMove(1, 4, 1, false);
             break;
     
         case 'ArrowDown':
-            makeMove(2, -1, -1, false);
+            madeMove = makeMove(2, -1, -1, false);
             break;
 
         case 'ArrowLeft':
-            makeMove(1, 4, 1, true);
+            madeMove = makeMove(1, 4, 1, true);
             break;
     
         case 'ArrowRight':
-            makeMove(2, -1, -1, true);
+            madeMove = makeMove(2, -1, -1, true);
             break;
 
         default:
-            break;
+            return;
     }
+
+    if (madeMove) {
+        fillEmptyCell()
+        drawCells();
+    } else if (fullTable())
+        gameOver();
 })
 
 // move every cell in particular direction
 function makeMove (start, end, step, vertical) {
     let moves = 0;
+    let result;
 
     for (let i = 0; i < 4; ++i) {
         let border = (start - step);
 
         for (let j = start; j != end; j += step) {
-            if (vertical) {
-                if (cells[i][j] == 0)
-                    continue;
+            if ((vertical && cells[i][j] == 0) || (!vertical && cells[j][i] == 0))
+                continue;
 
-                for (let k = j; k != border; k -= step) {
-                    if (cells[i][k - step] == 0) {
-                        cells[i][k - step] = cells[i][k];
-                        cells[i][k] = 0;
-                        moves++;
-                    }
-                    else if (cells[i][k - step] == cells[i][k]) {
-                        cells[i][k - step] *= 2;
-                        cells[i][k] = 0;
-                        score += cells[i][k - step];
-                        border = k;
-                        moves++;
-                        break;
-                    }
-                    else {
-                        border += step
-                        break;
-                    }
-                }
-
-            } else {
-                if (cells[j][i] == 0)
-                    continue;
-
-                for (let k = j; k != border; k -= step) {
-                    if (cells[k - step][i] == 0) {
-                        cells[k - step][i] = cells[k][i];
-                        cells[k][i] = 0;
-                        moves++;
-                    }
-                    else if (cells[k - step][i] == cells[k][i]) {
-                        cells[k - step][i] *= 2;
-                        cells[k][i] = 0;
-                        score += cells[k - step][i];
-                        border = k;
-                        moves++;
-                        break;
-                    }
-                    else {
-                        border += step
-                        break;
-                    }
-                }
+            for (let k = j; k != border; k -= step) {
+                result = (vertical) ? shiftCell(i, i, k - step, k) : shiftCell(k - step, k, i, i);
+                
+                if (result == 0) {
+                    moves++
+                    border = k;   
+                    break;
+                } else if (result == 2) {
+                    border += step;
+                    break;
+                } else moves++;
 
             }
+
         }
 
     }
 
-    if (moves > 0)
-        fillEmptyCell();
+    return moves > 0;
+}
 
-    drawCells();
+function shiftCell(nextX, currX, nextY, currY) {    
+    let result = 0;
+
+    if (cells[nextX][nextY] == 0 || cells[nextX][nextY] == cells[currX][currY]) {
+        if (cells[nextX][nextY] == cells[currX][currY]) {
+            score += (2 * cells[nextX][nextY]);
+            result = 1;
+        }
+        cells[nextX][nextY] += cells[currX][currY];
+        cells[currX][currY] = 0;
+
+        return (result == 0) ? 1 : 0;
+    }
+
+    return 2;
+}
+
+// check if table is full and game can go on or no
+function fullTable() {
+    for (let i = 0; i < 4; ++i) {
+        if (cells[i][4] == 0)
+            return false;
+
+        for (let j = 0; j < 3; ++j) {
+            if (cells[i][j] == 0)
+                return false;
+            if (cells[i][j] == cells[i][j + 1])
+                return false;
+            if (cells[j][i] == cells[j + 1][i])
+                return false;
+        }
+
+    }
+
+    return true;
 }
 
 // end of game, evaluate result
-function fullTable() {
-    console.log('score:');
-    console.log(score);
+function gameOver() {
+
 }
