@@ -78,7 +78,9 @@ document.addEventListener('keydown', (event) => {
     if (madeMove) {
         fillEmptyCell()
         drawCells();
-    } else if (fullTable())
+    }
+    
+    if (fullTable())
         gameOver();
 })
 
