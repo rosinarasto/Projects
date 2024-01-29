@@ -209,8 +209,6 @@ function reset() {
     drawCells();
     drawScore();
 
-    gameInProcess = false;
-
     if (!gameInProcess) {
         document.querySelector('.game-over').className = 'game-process';
         document.querySelector('footer').querySelector('.reset-button').className = 'reset-button';
