@@ -21,13 +21,13 @@
 
         <div class="score-board">
 
-            <div class="score" data-index="0">
+            <div class="score">
                 <h2 class="headline">SCORE</h2>
                 <h2 class="headline"></h2>
                 <h2 class="num-score">0</h2>
             </div>
 
-            <div class="score" data-index="1">
+            <div class="score">
                 <h2 class="headline">BEST</h2>
                 <h2 class="headline">SCORE</h2>
                 <h2 class="num-score">0</h2>
@@ -67,17 +67,16 @@
             <div data-index="4" class="cell isEmpty"></div>
         </div>
 
-<!-- reset button need fix, it doesnt work as i thought it would :( -->
-        <div class="gameProcess">
+        <div class="game-over">
             <h2>Game over</h2>
-            <button class="resetButton" type="reset">TRY AGAIN</button>    
+            <button class="reset-button" onclick="reset()">TRY AGAIN</button>    
         </div>
 
     </main>
     
     <footer>
 
-        <button class="resetButton" type="reset">RESET</button>
+        <button class="reset-button" onclick="reset()">RESET</button>
     
     </footer>
 

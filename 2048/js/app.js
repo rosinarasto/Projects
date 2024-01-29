@@ -1,6 +1,7 @@
 let cells = [];
 let score = 0;
 let bestScore = 0;
+let gameInProcess = true;
 
 for (let i = 0; i < 4; ++i)
     cells.push([0, 0, 0, 0]);
@@ -8,6 +9,7 @@ for (let i = 0; i < 4; ++i)
 cells[getRandomInt(4)][getRandomInt(4)] = 2;
 fillEmptyCell();
 drawCells();
+drawScore();
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -32,6 +34,17 @@ function fillEmptyCell() {
     cells[x][y] = 2;
 }
 
+function fullTable() {
+
+    for (let i = 0; i < 4; i++)
+
+        for (let j = 0; j < 4; j++)
+            if (cells[i][i] == 0)
+                return false;
+
+    return true;
+}
+
 //add number and collor to cells that are not empty
 function drawCells() {
 
@@ -51,8 +64,16 @@ function drawCells() {
 
 }
 
+function drawScore() {
+    document.querySelector('.score:nth-child(1)').querySelector('.num-score').innerHTML = score;
+    document.querySelector('.score:nth-child(2)').querySelector('.num-score').innerHTML = bestScore;
+}
+
 // keyboard
 document.addEventListener('keydown', (event) => {
+    if (!gameInProcess)
+        return;
+
     let madeMove = false;
     switch (event.key) {
         case 'ArrowUp':
@@ -78,10 +99,10 @@ document.addEventListener('keydown', (event) => {
     if (madeMove) {
         fillEmptyCell()
         drawCells();
+        drawScore();
     }
-    
-    if (fullTable())
-        gameOver();
+
+    gameOver(endOfGame());
 })
 
 // move every cell in particular direction
@@ -114,7 +135,7 @@ function makeMove (start, end, step, vertical) {
 
     }
 
-    return moves > 0;
+    return (moves > 0);
 }
 
 function shiftCell(nextX, currX, nextY, currY) {    
@@ -134,27 +155,65 @@ function shiftCell(nextX, currX, nextY, currY) {
     return 2;
 }
 
-// check if table is full and game can go on or no
-function fullTable() {
+// decide if table is full, player won or game should go on
+function endOfGame() {
+
     for (let i = 0; i < 4; ++i) {
-        if (cells[i][4] == 0)
-            return false;
+        if (cells[i][3] == 0)
+            return 0;
+
+        if (cells[i][3] == 2048)
+            return 2;
 
         for (let j = 0; j < 3; ++j) {
             if (cells[i][j] == 0)
-                return false;
+                return 0;
+            if (cells[i][j] == 2048)
+                return 2;
             if (cells[i][j] == cells[i][j + 1])
-                return false;
+                return 1;
             if (cells[j][i] == cells[j + 1][i])
-                return false;
+                return 1;
         }
 
     }
 
-    return true;
+    return 3;
 }
 
 // end of game, evaluate result
-function gameOver() {
+function gameOver(ending) {
+    if (ending < 2 || ending > 3)
+        return;
 
+    document.querySelector('.game-process').querySelector('h2').innerHTML = (ending == 3) ? 'Game over' : 'You won!!'; 
+    document.querySelector('.game-process').className = 'game-over';
+    document.querySelector('footer').querySelector('.reset-button').className = 'game-process reset-button';
+    if (score > bestScore)
+        bestScore = score;
+
+    drawScore();
+    gameInProcess = false;
+}
+
+function reset() {
+
+    for (let i = 0; i < 4; i++)
+
+        for (let j = 0; j < 4; j++)
+            cells[i][j] = 0;
+
+    score = 0;
+    fillEmptyCell();
+    fillEmptyCell();
+    drawCells();
+    drawScore();
+
+    gameInProcess = false;
+
+    if (!gameInProcess) {
+        document.querySelector('.game-over').className = 'game-process';
+        document.querySelector('footer').querySelector('.reset-button').className = 'reset-button';
+        gameInProcess = true;
+    }
 }
