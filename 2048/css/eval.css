@@ -1,0 +1,50 @@
+.game-process {
+    position: absolute;
+    background-color: rgba(184, 184, 184, 0);
+    color: rgba(184, 184, 184, 0);
+}
+
+.game-process .reset-button,
+.game-process .reset-button:active,
+.game-process .reset-button:hover {
+    background-color: rgba(184, 184, 184, 0);
+    color: rgba(184, 184, 184, 0);
+    border: 0px solid;
+
+}
+
+.game-over {
+    display: grid; 
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    color: rgb(30, 29, 29);
+    background-color: rgba(184, 184, 184, 0.8);
+
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    border-radius: 5%;
+    white-space: nowrap;
+}
+
+.game-over h2 {
+    margin: 10px;
+    margin-top: 0px;
+}
+
+.game-over .reset-button {
+    border-radius: 6%;
+    margin: 10px;
+    margin-top: 0px;
+}
+
+.game-over .reset-button:hover,
+.game-over .reset-button:active {
+    margin: 5px;
+    margin-top: 0px;
+}
